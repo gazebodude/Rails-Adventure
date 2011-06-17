@@ -7,18 +7,14 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <nav id="navigation_bar">
-    <ul>
-      <li><%= link_to "Home", root_path %></li>
-      <li><%= link_to "About", about_path %></li>
-    </ul>
-  </nav>
-  <header>
-    <%= render 'layouts/header' %>
-  </header>
+  <%= render 'layouts/navbar' %>
+  <%= render 'layouts/header' %>
 
-  <%= yield %>
+  <div class="main_view">
+    <%= yield %>
+  </div>
 
+  <%= render 'layouts/footer' %>
   <%= debug(params) if Rails.env.development? %>
 </body>
 </html>

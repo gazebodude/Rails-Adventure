@@ -2,6 +2,44 @@ body {
   background-color: #aaa;
 }
 
-#navigation_bar {
+div.main_view {
+  background-color: #ddd;
+  width: 650px;
+  outline: #111 solid thin;
+  padding: 10px;
+}
+
+h2.topline {
+  text-align: center;
+}
+
+div.content {
+  width: 600px;
+  font-size: 12pt;
+}
+
+/* Header */
+header h1 {
+  font-size:  30pt;
+  text-align: center;
+}
+
+/* Footer */
+footer p {
+  font-size: 8pt;
+}
+
+/* Navigation Bar */
+nav#navigation_bar {
   float: right;
+  outline: #111 solid thin;
+}
+
+nav#navigation_bar ul {
+  list-style-type: none;
+  padding: 10px;
+}
+
+nav#navigation_bar ul li {
+  padding: 2px;
 }

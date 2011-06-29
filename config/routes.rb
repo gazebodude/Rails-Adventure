@@ -1,4 +1,6 @@
 Adventure::Application.routes.draw do
+  resources :nodes
+
   match '/about' => 'pages#about', :as => :about
 
   root :to => "pages#home"

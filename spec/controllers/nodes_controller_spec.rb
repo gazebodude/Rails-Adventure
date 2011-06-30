@@ -19,6 +19,7 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe NodesController do
+  render_views
 
   # This should return the minimal set of attributes required to create a valid
   # Node. As you add validations to Node, be sure to
@@ -33,6 +34,15 @@ describe NodesController do
       get :index
       assigns(:nodes).should eq([node])
     end
+
+    it "shows all the nodes" do
+      Node.create! valid_attributes.merge(:title => "Title1")
+      Node.create! valid_attributes.merge(:title => "Title2")
+      get :index
+      Node.all.each do |n|
+        response.should have_selector("span.node_title", :content => n.title)
+      end
+    end
   end
 
   describe "GET show" do
@@ -40,6 +50,35 @@ describe NodesController do
       node = Node.create! valid_attributes
       get :show, :id => node.id.to_s
       assigns(:node).should eq(node)
+    end
+
+    it "shows the requested node" do
+      node = Node.create! valid_attributes
+      get :show, :id => node.id.to_s
+      response.should have_selector("span.node_title", :content => node.title)
+    end
+
+    it "has links to all the child nodes" do
+      # create a node with three children
+      root_node = Node.create! valid_attributes
+      1.upto(3) do |i|
+        root_node.children.create!( :title  => "Child #{i}",
+                                    :body   => "You see #{i} little stones.",
+                                    :action_desc => "Jump #{i} times." )
+      end
+      get :show, :id => root_node.id.to_s
+      root_node.children.each do |child|
+        response.should have_selector("a", :href => node_path(child),
+                                      :class => "child_link",
+                                      :content => child.action_desc)
+      end
+    end
+
+    it "should have a new action link" do
+      node = Node.create! valid_attributes
+      get :show, :id => node.id.to_s
+      response.should have_selector("a",
+                              :href => new_node_path(:parent_id => node.id))
     end
   end
 

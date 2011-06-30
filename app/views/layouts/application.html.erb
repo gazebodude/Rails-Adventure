@@ -11,6 +11,14 @@
   <%= render 'layouts/header' %>
 
   <div class="main_view">
+    <% unless flash.empty? then %>
+      <div id="flash_messages">
+      <% flash.each do |key, value| %>
+        <span class="flash_key"><%= key.upcase %></span>: 
+        <span class="flash_value"><%= value %></span><br />
+      <% end %>
+      </div>
+    <% end %>
     <%= yield %>
   </div>
 

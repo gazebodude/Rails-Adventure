@@ -1,8 +1,11 @@
 class NodesController < ApplicationController
+  ROOT_NODE_ID = 1
+
   # GET /nodes
   # GET /nodes.xml
   def index
     @nodes = Node.all
+    @title = "Nodes"
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +17,7 @@ class NodesController < ApplicationController
   # GET /nodes/1.xml
   def show
     @node = Node.find(params[:id])
+    @title = @node.title
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +29,8 @@ class NodesController < ApplicationController
   # GET /nodes/new.xml
   def new
     @node = Node.new
+    @parent_id = params[:parent_id]
+    @title = "New Node"
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,16 +46,24 @@ class NodesController < ApplicationController
   # POST /nodes
   # POST /nodes.xml
   def create
-    @node = Node.new(params[:node])
+    begin
+      @parent_id = params[:node][:parent_id]
+      @parent = Node.find(@parent_id)
+      @node = @parent.children.new(params[:node])
 
-    respond_to do |format|
-      if @node.save
-        format.html { redirect_to(@node, :notice => 'Node was successfully created.') }
-        format.xml  { render :xml => @node, :status => :created, :location => @node }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @node.errors, :status => :unprocessable_entity }
+      respond_to do |format|
+        if @node.save
+          format.html { redirect_to(@node, :notice => 'Node was successfully created.') }
+          format.xml  { render :xml => @node, :status => :created, :location => @node }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @node.errors, :status => :unprocessable_entity }
+        end
       end
+    rescue ActiveRecord::RecordNotFound
+      @node = Node.new
+      flash[:warning] = "Parent node id #{@parent_id} invalid."
+      render :action => :new
     end
   end
 

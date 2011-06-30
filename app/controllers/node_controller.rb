@@ -1,2 +1,0 @@
-class NodeController < ApplicationController
-end

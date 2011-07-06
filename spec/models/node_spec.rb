@@ -81,3 +81,17 @@ describe Node do
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: nodes
+#
+#  id          :integer         not null, primary key
+#  title       :string(255)
+#  body        :text
+#  created_at  :datetime
+#  updated_at  :datetime
+#  parent_id   :integer
+#  action_desc :string(255)
+#
+

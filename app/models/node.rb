@@ -8,6 +8,7 @@ class Node < ActiveRecord::Base
   validates_presence_of :title, :body, :action_desc
   validates_length_of :title, :maximum => 40
   validates_length_of :body,  :maximum => 1000
+  validates_length_of :action_desc, :maximum => 200
 end
 
 # == Schema Information

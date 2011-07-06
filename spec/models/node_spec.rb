@@ -79,6 +79,11 @@ describe Node do
       test_node = Node.new(@attr.merge(:action_desc => ''))
       test_node.should_not be_valid
     end
+
+    it "shouldn't allow action descriptions that are too long" do
+      test_node = Node.new(@attr.merge(:action_desc => 'a'*201))
+      test_node.should_not be_valid
+    end
   end
 end
 

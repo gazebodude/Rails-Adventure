@@ -19,22 +19,31 @@ Please feel free to fork & deploy whenever and wherever you want to _**BUT**_ pl
 ## Get it running
 
 To get it running first do a git clone to get a local copy of the repo.
+
 ```
 git clone git://github.com/gazebodude/Rails-Adventure.git
 ```
+
 Then run bundle to get all of the gems.
+
 ```
 bundle
 ```
+
 Then set up the database. Note that you need to seed the database to get the root node of the story tree. (You can edit the content of the root node via the browser or in db/seeds.rb if you like.)
+
 ```
 rake db:migrate
+
 rake db:seed
 ```
+
 And
+
 ```
 rake db:test:prepare
 ```
+
 to get the test database & the specs working. Now you're ready to go.
 
 ## Contact

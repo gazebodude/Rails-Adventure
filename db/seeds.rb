@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+Node.create(
+  :title => "It Begins",
+  :body => "It was a dark and stormy night.",
+  :action_desc => "Join the story",
+  :parent_id => nil
+)

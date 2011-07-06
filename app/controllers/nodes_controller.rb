@@ -16,12 +16,17 @@ class NodesController < ApplicationController
   # GET /nodes/1
   # GET /nodes/1.xml
   def show
-    @node = Node.find(params[:id])
-    @title = @node.title
+    @node = Node.find_by_id(params[:id])
+    @title = @node.title if @node
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @node }
+      if !@node.nil?
+        format.html # show.html.erb
+        format.xml  { render :xml => @node }
+      else
+        flash[:warning] = "Node ##{params[:id]} doesn't exist."
+        format.html { redirect_to(root_path) }
+      end
     end
   end
 
@@ -33,13 +38,19 @@ class NodesController < ApplicationController
     @title = "New Node"
 
     respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @node }
+      if !@parent_id.nil? && !Node.find_by_id(@parent_id).nil?
+        format.html # new.html.erb
+        format.xml  { render :xml => @node }
+      else
+        flash[:warning] = "Node ##{@parent_id} doesn't exist."
+        format.html { redirect_to(root_path) }
+      end
     end
   end
 
   # GET /nodes/1/edit
   def edit
+    @title = "Edit Node"
     @node = Node.find(params[:id])
   end
 
@@ -56,7 +67,7 @@ class NodesController < ApplicationController
           format.html { redirect_to(@node, :notice => 'Node was successfully created.') }
           format.xml  { render :xml => @node, :status => :created, :location => @node }
         else
-          format.html { render :action => "new" }
+          format.html { render :action => "new"}
           format.xml  { render :xml => @node.errors, :status => :unprocessable_entity }
         end
       end

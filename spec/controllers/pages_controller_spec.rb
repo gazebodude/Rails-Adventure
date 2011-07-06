@@ -3,6 +3,22 @@ require 'spec_helper'
 describe PagesController do
   render_views
 
+  def valid_attributes
+    { :title => "Title",
+      :body => "Body",
+      :action_desc => "Action",
+      :parent_id => 1}
+  end
+
+  before(:each) do
+    begin
+      Node.find(1)
+    rescue ActiveRecord::RecordNotFound
+      # root node has a parent_id of nil
+      Node.create! valid_attributes.merge(:parent_id => nil)
+    end
+  end
+
   describe "GET 'home'" do
     it "should be successful" do
       get 'home'

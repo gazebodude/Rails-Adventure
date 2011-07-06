@@ -12,17 +12,20 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </div>
-  <div class="field">
-    <%= f.label :action_desc %><br />
+    <%= f.label :action_desc, "What do you do? (briefly)" %><br />
     <%= f.text_field :action_desc %>
   </div>
+
+  <div class="field">
+    <%= f.label :body, "Describe the result" %><br />
+    <%= f.text_area :body %>
+  </div>
+
+  <div class="field">
+    <%= f.label :title, "Now give the new node a title" %><br />
+    <%= f.text_field :title %>
+  </div>
+
   <div class="field">
     <%= f.hidden_field :parent_id, :value => @parent_id %>
   </div>

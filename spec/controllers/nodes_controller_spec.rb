@@ -61,7 +61,7 @@ describe NodesController do
 
     it "shows the requested node" do
       get :show, :id => @node.id.to_s
-      response.should have_selector("span.node_title", :content => @node.title)
+      response.should have_selector("title", :content => @node.title)
     end
 
     it "has links to all the child nodes" do
@@ -84,16 +84,22 @@ describe NodesController do
       response.should have_selector("a",
                               :href => new_node_path(:parent_id => @node.id))
     end
+
+    it "should redirect home if the node doesn't exist" do
+      get :show, :id => 99999 # nonexistent node
+      response.should redirect_to( root_path )
+      flash[:warning].should == "Node #99999 doesn't exist."
+    end
   end
 
   describe "GET new" do
     it "has the right title" do
-      get :new
+      get :new, :parent_id => 1
       response.should have_selector("title", :content => "New Node")
     end
 
     it "assigns a new node as @node" do
-      get :new
+      get :new, :parent_id => 1
       assigns(:node).should be_a_new(Node)
     end
   end
@@ -103,6 +109,12 @@ describe NodesController do
       node = Node.create! valid_attributes
       get :edit, :id => node.id.to_s
       assigns(:node).should eq(node)
+    end
+
+    it "should have the right title" do
+      node = Node.create! valid_attributes
+      get :edit, :id => node.id.to_s
+      response.should have_selector("title", :content => "Edit Node")
     end
   end
 

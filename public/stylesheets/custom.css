@@ -1,12 +1,14 @@
 body {
-  background-color: #aaa;
+  background-color: #dda;
 }
 
 div.main_view {
-  background-color: #ddd;
+  background-color: #ddf;
   width: 650px;
   outline: #111 solid thin;
   padding: 10px;
+  text-align: center;
+  margin-left: 250px;
 }
 
 h2.topline {
@@ -18,10 +20,22 @@ div.content {
   font-size: 12pt;
 }
 
+a {
+  color: #60a;
+}
+
+a:hover {
+  color: #f00;
+}
+
+a:visited {
+  color: #508;
+}
+
 /* Header */
 header h1 {
-  font-size:  30pt;
-  text-align: center;
+  font-size:  250%;
+  margin-left: 250px;
 }
 
 /* Footer */
@@ -31,7 +45,7 @@ footer p {
 
 /* Navigation Bar */
 nav#navigation_bar {
-  float: right;
+  float: left;
   outline: #111 solid thin;
 }
 
@@ -42,4 +56,31 @@ nav#navigation_bar ul {
 
 nav#navigation_bar ul li {
   padding: 2px;
+}
+
+/* Node show page */
+div#node {
+  float: center;
+}
+
+span.node_title {
+  font-size: 200%;
+}
+
+span.node_body {
+  font-size: 150%;
+}
+
+div#children {
+  text-align: center;
+  line-height: 150%;
+}
+
+a.child_link {
+}
+div#node a {
+}
+
+div#node a:hover {
+  color: #f00;
 }

@@ -1,18 +1,17 @@
 <p id="notice"><%= notice %></p>
 
 <div id="node">
-  <span class="node_title"><%= @node.title %></span><br />
   <span class="node_body"><%= @node.body %></span><br />
-  <span class="node_action_desc"><%= @node.action_desc %></span><br />
   <div id="children">
     <% unless @node.children.empty? then %>
       <% @node.children.each do |child| %>
         <%= link_to child.action_desc, child, :class => "child_link" %> |
       <% end %>
     <% end %>
-    <%= link_to "or do something else",
-        new_node_path(:parent_id => @node.id) %>
+    <%= link_to add_action_link_text(@node.children.length),
+        new_node_path(:parent_id => @node.id) %><br />
+    <%= link_to 'Edit this node', edit_node_path(@node) %> |
+    <%= link_to 'Go back', @node.parent %>
   </div>
+
 </div>
-<%= link_to 'Edit', edit_node_path(@node) %> |
-<%= link_to 'Back', nodes_path %>

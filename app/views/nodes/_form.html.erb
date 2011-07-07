@@ -21,14 +21,12 @@
     <%= f.text_area :body %>
   </div>
 
-  <div class="field">
+  <div class="field node_title">
     <%= f.label :title, "Now give the new node a title" %><br />
     <%= f.text_field :title %>
   </div>
 
-  <div class="field">
-    <%= f.hidden_field :parent_id, :value => @parent_id %>
-  </div>
+  <%= f.hidden_field :parent_id, :value => @parent_id %>
 
   <div class="actions">
     <%= f.submit %>

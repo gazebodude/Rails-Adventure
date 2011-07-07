@@ -84,3 +84,29 @@ div#node a {
 div#node a:hover {
   color: #f00;
 }
+
+/* Form elements */
+div.field {
+  padding-bottom: 20px;
+}
+
+div label {
+  font-size: 120%;
+  color: #600;
+}
+
+div#node_action_desc_counter {
+  font-size: 80%;
+}
+
+div#node_body_counter {
+  font-size: 80%;
+}
+
+div#node_title_counter {
+  font-size: 80%;
+}
+
+div.node_title {
+  padding-bottom: 0px;
+}
